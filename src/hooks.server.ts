@@ -1,5 +1,5 @@
 import { StarLedger_Base_Url } from '$lib';
-import StarLedgerApiService from '$lib/services/starLedgerApiService';
+import { starLedgerRefreshAsync } from '$lib/services/starLedgerApiService';
 import { type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
@@ -28,7 +28,7 @@ export const refreshHandle: Handle = async ({ event, resolve }) => {
 		return await resolve(event);
 	}
 
-	const refreshResult = StarLedgerApiService.refreshAsync(refreshToken, event.cookies);
+	const refreshResult = starLedgerRefreshAsync(refreshToken, event.cookies);
 
 	if (await refreshResult) {
 		const token = event.cookies.get('token');

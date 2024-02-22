@@ -1,7 +1,7 @@
 import { fail, type Actions, type Action, type Cookies, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import StarLedgerApiService from '$lib/services/starLedgerApiService';
 import { z } from 'zod';
+import { starLedgerLoginAsync } from '$lib/services/starLedgerApiService';
 
 const loginSchema = z.object({
 	email: z.string({ required_error: 'Email is required' }).email({ message: 'Invalid email address' }),
@@ -19,7 +19,7 @@ export const load = (async ({ url, cookies, locals }) => {
 
 	if (fromRegister === 'true' && email && password) {
 		console.log('Logging in from register');
-		loginAsync(email, password, cookies);
+		starLedgerLoginAsync(email, password, cookies);
 	}
 
 	return {};
@@ -38,11 +38,11 @@ const login: Action = async ({ request, cookies }) => {
 	const email = parseResult.data.email;
 	const password = parseResult.data.password;
 
-	await loginAsync(email, password, cookies);
+	await loginAsyncAction(email, password, cookies);
 };
 
-async function loginAsync(email: string, password: string, cookies: Cookies) {
-	const loginResult = await StarLedgerApiService.loginAsync(email, password, cookies);
+async function loginAsyncAction(email: string, password: string, cookies: Cookies) {
+	const loginResult = await starLedgerLoginAsync(email, password, cookies);
 
 	if (!(await loginResult).valueOf) {
 		return fail(400, { failed: true });
