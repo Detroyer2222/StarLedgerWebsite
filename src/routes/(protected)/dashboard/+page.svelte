@@ -7,3 +7,4 @@
 <h1>Dashboard</h1>
 <p>Some text that should show up</p>
 <p>{data.user?.email}</p>
+<p>{data.user?.name}</p>

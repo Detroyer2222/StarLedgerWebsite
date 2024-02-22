@@ -45,7 +45,7 @@ export const refreshHandle: Handle = async ({ event, resolve }) => {
 };
 
 async function setAuthenticatedUser(token: string) {
-	const response = await fetch(`${StarLedger_Base_Url}/users/information`, {
+	const response = await fetch(`${StarLedger_Base_Url}/users/claims`, {
 		method: 'GET',
 		headers: {
 			Authorization: 'Bearer ' + token,
@@ -58,9 +58,8 @@ async function setAuthenticatedUser(token: string) {
 	}
 
 	const data = await response.json();
-	console.log('User Data:', data);
 	const userId = data['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-	const name = data['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+	const name = data['StarCitizenHandle'];
 	const email = data['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
 	const role = data['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 	const organization = data['Organization'];
@@ -72,7 +71,6 @@ async function setAuthenticatedUser(token: string) {
 		role: role,
 		organization: organization
 	};
-	console.log('User:', user);
 
 	return user;
 }

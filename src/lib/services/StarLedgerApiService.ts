@@ -1,4 +1,5 @@
 import { StarLedger_Base_Url } from '$lib';
+import type { TokenResponse } from '$lib/types';
 import { type Cookies } from '@sveltejs/kit';
 
 /**
@@ -47,7 +48,6 @@ class StarLedgerApiService {
 	 * @returns {Promise} A promise that resolves to a fetch response object.
 	 */
 	async refreshAsync(refreshToken: string, cookies: Cookies) {
-		console.log('refreshing token');
 		const response = await fetch(`${this.baseUrl}/identity/refresh`, {
 			method: 'POST',
 			headers: {
@@ -56,7 +56,6 @@ class StarLedgerApiService {
 			},
 			body: JSON.stringify({ refreshToken })
 		});
-		console.log('refresh response', response);
 
 		if (response.ok) {
 			const tokenResponse: TokenResponse = await response.json();
@@ -67,20 +66,6 @@ class StarLedgerApiService {
 			// General error
 			return false;
 		}
-	}
-
-	async getAuthenticatedApiClient(cookies: Cookies) {
-		const token = cookies.get('token');
-		if (!token) {
-			return null;
-		}
-		return fetch(`${this.baseUrl}/api`, {
-			method: 'GET',
-			headers: {
-				Authorization: 'Bearer ' + token,
-				Accept: '*/*'
-			}
-		});
 	}
 
 	private setCookies(cookies: Cookies, tokenResponse: TokenResponse) {
