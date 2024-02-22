@@ -1,7 +1,7 @@
 import { fail, type Actions, type Action, type Cookies, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
-import { starLedgerLoginAsync } from '$lib/services/starLedgerApiService';
+import { starLedgerLoginAsync } from '$lib/starLedgerApiService';
 
 const loginSchema = z.object({
 	email: z.string({ required_error: 'Email is required' }).email({ message: 'Invalid email address' }),

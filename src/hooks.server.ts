@@ -1,5 +1,5 @@
 import { StarLedger_Base_Url } from '$lib';
-import { starLedgerRefreshAsync } from '$lib/services/starLedgerApiService';
+import { starLedgerRefreshAsync } from '$lib/starLedgerApiService';
 import { type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
