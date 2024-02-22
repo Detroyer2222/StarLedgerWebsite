@@ -25,10 +25,12 @@ export async function starLedgerLoginAsync(email: string, password: string, cook
 		},
 		body: JSON.stringify({ email, password })
 	});
+	console.log('response', response);
 
 	if (response.ok) {
 		const tokenResponse = await response.json();
 		setCookies(cookies, tokenResponse);
+		console.log('tokenResponse', tokenResponse);
 
 		return true;
 	} else {

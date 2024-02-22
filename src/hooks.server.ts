@@ -20,6 +20,7 @@ export const authHandle: Handle = async ({ event, resolve }) => {
 
 export const refreshHandle: Handle = async ({ event, resolve }) => {
 	if (event.locals.user) {
+		console.log('user is already authenticated');
 		return await resolve(event);
 	}
 	const refreshToken = event.cookies.get('refreshToken');
