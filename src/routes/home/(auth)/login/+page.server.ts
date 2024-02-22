@@ -20,6 +20,7 @@ export const load = (async ({ url, cookies, locals }) => {
 	if (fromRegister === 'true' && email && password) {
 		console.log('Logging in from register');
 		await starLedgerLoginAsync(email, password, cookies);
+		return redirect(302, '/dashboard');
 	}
 
 	return {};
