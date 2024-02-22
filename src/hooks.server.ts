@@ -29,9 +29,9 @@ export const refreshHandle: Handle = async ({ event, resolve }) => {
 		return await resolve(event);
 	}
 
-	const refreshResult = starLedgerRefreshAsync(refreshToken, event.cookies);
+	const refreshResult = await starLedgerRefreshAsync(refreshToken, event.cookies);
 
-	if (await refreshResult) {
+	if (refreshResult) {
 		const token = event.cookies.get('token');
 		if (!token) {
 			return await resolve(event);
