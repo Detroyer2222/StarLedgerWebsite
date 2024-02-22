@@ -52,7 +52,9 @@
 				{/if}
 			</Label>
 		</div>
-		<Button type="submit" class="bg-green-500 text-base font-normal hover:bg-green-400 dark:bg-green-700 ">Update profile</Button>
+		<Button type="submit" class="bg-green-500 text-base font-normal hover:bg-green-400 dark:bg-green-700 dark:hover:bg-green-600 "
+			>Update profile</Button
+		>
 	</form>
 	<Alert border color="blue" class="mt-10 w-2/5">
 		<InfoCircleSolid slot="icon" class="h-4 w-4" />
