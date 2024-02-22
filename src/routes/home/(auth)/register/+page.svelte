@@ -93,6 +93,6 @@
 	{/if}
 	<Button type="submit">Create account</Button>
 	<div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-		Already have an account? <A href="/login">Login here</A>
+		Already have an account? <A href="/home/login">Login here</A>
 	</div>
 </form>

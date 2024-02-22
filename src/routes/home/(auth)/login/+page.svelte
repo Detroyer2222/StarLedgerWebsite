@@ -57,6 +57,6 @@
 	<!-- TODO: Think about adding Checkbox to save email in localstorage -->
 	<Button type="submit">Login</Button>
 	<div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-		Not registered? <A href="/register">Create account</A>
+		Not registered? <A href="/home/register">Create account</A>
 	</div>
 </form>

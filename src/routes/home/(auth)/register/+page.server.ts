@@ -3,7 +3,10 @@ import type { PageServerLoad } from './$types';
 import { StarLedger_Base_Url } from '$lib';
 import { z } from 'zod';
 
-export const load = (async () => {
+export const load = (async ({ locals }) => {
+	if (locals.user) {
+		return redirect(302, '/dashboard');
+	}
 	return {};
 }) satisfies PageServerLoad;
 
@@ -65,7 +68,7 @@ const register: Action = async ({ request }) => {
 		return fail(400, { general: true });
 	}
 
-	throw redirect(302, '/login?fromRegister=true&email=' + email + '&password=' + password);
+	throw redirect(302, '/home/login?fromRegister=true&email=' + email + '&password=' + password);
 };
 
 export const actions: Actions = { register };

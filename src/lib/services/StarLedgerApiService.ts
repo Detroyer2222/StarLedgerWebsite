@@ -23,7 +23,8 @@ class StarLedgerApiService {
 		const response = await fetch(`${this.baseUrl}/identity/login`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				Accept: '*/*'
 			},
 			body: JSON.stringify({ email, password })
 		});
@@ -45,15 +46,17 @@ class StarLedgerApiService {
 	 * @param {Cookies} cookies - The cookies object.
 	 * @returns {Promise} A promise that resolves to a fetch response object.
 	 */
-	async refreshAsync(cookies: Cookies) {
-		const refreshToken = cookies.get('refreshToken');
+	async refreshAsync(refreshToken: string, cookies: Cookies) {
+		console.log('refreshing token');
 		const response = await fetch(`${this.baseUrl}/identity/refresh`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				Accept: '*/*'
 			},
 			body: JSON.stringify({ refreshToken })
 		});
+		console.log('refresh response', response);
 
 		if (response.ok) {
 			const tokenResponse: TokenResponse = await response.json();
@@ -74,7 +77,8 @@ class StarLedgerApiService {
 		return fetch(`${this.baseUrl}/api`, {
 			method: 'GET',
 			headers: {
-				Authorization: 'Bearer ' + token
+				Authorization: 'Bearer ' + token,
+				Accept: '*/*'
 			}
 		});
 	}

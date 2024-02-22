@@ -8,7 +8,11 @@ const loginSchema = z.object({
 	password: z.string({ required_error: 'Password is required' })
 });
 
-export const load = (async ({ url, cookies }) => {
+export const load = (async ({ url, cookies, locals }) => {
+	if (locals.user) {
+		return redirect(302, '/dashboard');
+	}
+
 	const email = url.searchParams.get('email');
 	const password = url.searchParams.get('password');
 	const fromRegister = url.searchParams.get('fromRegister');
@@ -44,7 +48,7 @@ async function loginAsync(email: string, password: string, cookies: Cookies) {
 		return fail(400, { failed: true });
 	}
 
-	throw redirect(302, '/home');
+	throw redirect(302, '/dashboard');
 }
 
 export const actions: Actions = { login };

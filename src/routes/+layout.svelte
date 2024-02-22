@@ -1,33 +1,54 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import '../app.css';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button } from 'flowbite-svelte';
-	import { HomeSolid } from 'flowbite-svelte-icons';
+	import { Footer, FooterBrand, FooterCopyright, FooterIcon, FooterLink, FooterLinkGroup } from 'flowbite-svelte';
+	import type { LayoutData } from './$types';
+	import { DiscordSolid, GithubSolid } from 'flowbite-svelte-icons';
 
-	$: activeUrl = $page.url.pathname;
-	let activeClass =
-		'font-semibold text-lg text-white bg-green-700 md:bg-transparent md:text-green-700 md:dark:text-white dark:bg-green-600 md:dark:bg-transparent';
-	let nonActiveClass =
-		'font-semibold text-lg text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
+	export let data: LayoutData;
 </script>
 
-<Navbar>
-	<NavBrand href="/">
-		<HomeSolid color="primary" class="me-3 h-6 sm:h-9" />
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Star Ledger</span>
-	</NavBrand>
-	<NavHamburger />
-	<slot name="navbar">
-		<div class="flex md:order-2">
-			<Button size="sm" class="text-lg font-semibold" on:click={() => goto('/register')}>Get started</Button>
-		</div>
-		<NavUl {activeUrl} {activeClass} {nonActiveClass} class="ml-auto">
-			<NavLi href="/">Home</NavLi>
-			<!--<NavLi href="/pricing">Pricing</NavLi>-->
-			<NavLi href="/contact">Contact</NavLi>
-		</NavUl>
-	</slot>
-</Navbar>
-
 <slot />
+
+<Footer footerType="socialmedia" class="mt-16">
+	<div class="md:flex md:justify-between">
+		<div class="mb-6 md:mb-0">
+			<FooterBrand href="/" alt="StarLedger Logo" name="Star Ledger" />
+		</div>
+		<div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+			<!--<div>
+					<h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+					<FooterLinkGroup>
+						<FooterLink liClass="mb-4" href="/">Flowbite</FooterLink>
+						<FooterLink liClass="mb-4" href="/">Tailwind CSS</FooterLink>
+					</FooterLinkGroup>
+				</div>-->
+			<div>
+				<h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">Follow me</h2>
+				<FooterLinkGroup>
+					<FooterLink liClass="mb-4" href="https://github.com/Detroyer2222">GitHub</FooterLink>
+					<FooterLink liClass="mb-4" href="https://discordapp.com/users/232922680934924288">Discord</FooterLink>
+				</FooterLinkGroup>
+			</div>
+			<div>
+				<h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">Legal</h2>
+				<FooterLinkGroup>
+					<FooterLink liClass="mb-4" href="about/contact">Contact us</FooterLink>
+					<FooterLink liClass="mb-4" href="/about/privacy">Privacy Policy</FooterLink>
+					<FooterLink liClass="mb-4" href="about/terms">Terms & Conditions</FooterLink>
+				</FooterLinkGroup>
+			</div>
+		</div>
+	</div>
+	<hr class="my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
+	<div class="sm:flex sm:items-center sm:justify-between">
+		<FooterCopyright href="/" by="StarLedger™" />
+		<div class="mt-4 flex space-x-6 sm:mt-0 sm:justify-center rtl:space-x-reverse">
+			<FooterIcon href="https://discordapp.com/users/232922680934924288">
+				<DiscordSolid class="h-4 w-4 text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" />
+			</FooterIcon>
+			<FooterIcon href="https://github.com/Detroyer2222">
+				<GithubSolid class="h-4 w-4 text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" />
+			</FooterIcon>
+		</div>
+	</div>
+</Footer>

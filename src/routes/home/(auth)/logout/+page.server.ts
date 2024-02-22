@@ -18,6 +18,6 @@ export const actions: Actions = {
 			expires: new Date(0)
 		});
 
-		redirect(302, '/login');
+		redirect(302, '/home/login');
 	}
 };

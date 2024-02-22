@@ -1,4 +1,4 @@
-interface TokenResponse {
+export interface TokenResponse {
 	tokenType: string;
 	accessToken: string;
 	expiresIn: number;
