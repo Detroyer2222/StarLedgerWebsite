@@ -1,1 +1,1 @@
-export const StarLedger_Base_Url = import.meta.env.VITE_STARLEDGER_BASE_URL;
+export const StarLedger_Base_Url = 'https://starledger-api-dev.azurewebsites.net';
