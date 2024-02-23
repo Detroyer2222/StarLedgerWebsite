@@ -42,6 +42,31 @@ const updateProfile: Action = async ({ request, cookies, locals }) => {
 	redirect(302, '/home/logout');
 };
 
+const deleteAccount: Action = async ({ request, cookies, locals }) => {
+	const formData = Object.fromEntries(await request.formData());
+	const deleteAccount = formData['deleteAccount'];
+
+	if (deleteAccount !== 'Delete Account') {
+		return fail(400, { deleteAccountFailed: true });
+	}
+
+	const token = cookies.get('token');
+	const response = await fetch(`${StarLedger_Base_Url}/users/${locals.user.id}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: '*/*'
+		}
+	});
+
+	if (!response.ok) {
+		console.log('Failed to delete account');
+		return fail(400, { deleteAccountFailed: true });
+	}
+
+	redirect(302, '/home/logout');
+};
+
 async function updateUser(userId: string, starCitizenHandle: string, email: string, token: string) {
 	console.log('Updating Profile: ', userId, starCitizenHandle, email);
 	const response = await fetch(`${StarLedger_Base_Url}/users/${userId}`, {
@@ -57,4 +82,4 @@ async function updateUser(userId: string, starCitizenHandle: string, email: stri
 	return response;
 }
 
-export const actions: Actions = { updateProfile };
+export const actions: Actions = { updateProfile, deleteAccount };
