@@ -17,7 +17,7 @@ const registerSchema = z
 			.string({ required_error: 'Password is required' })
 			.min(8, { message: 'Password needs at least 8 letters' })
 			.max(64)
-			.trim(),
+			.trim(), // TODO: Add password complexity requirements
 		confirmPassword: z.string(),
 		terms: z.enum(['on'], { required_error: 'You must agree to the terms and conditions' })
 	})
@@ -68,7 +68,7 @@ const register: Action = async ({ request }) => {
 		return fail(400, { general: true });
 	}
 
-	throw redirect(302, '/home/login?fromRegister=true&email=' + email + '&password=' + password);
+	return redirect(302, '/home/login?fromRegister=true&email=' + email + '&password=' + password);
 };
 
 export const actions: Actions = { register };

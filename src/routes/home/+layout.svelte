@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, DarkMode } from 'flowbite-svelte';
 	import { HomeSolid } from 'flowbite-svelte-icons';
+	import type { LayoutData } from '../$types';
+
+	export let data: LayoutData;
 
 	let linkClass =
 		'font-semibold text-lg text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
@@ -23,6 +25,9 @@
 		<NavHamburger />
 	</div>
 	<NavUl class="order-1 ml-auto">
+		{#if data?.user}
+			<NavLi href="/dashboard" class={linkClass}>Dasboard</NavLi>
+		{/if}
 		<NavLi href="/home" class={linkClass}>Home</NavLi>
 		<NavLi href="/home/about/contact" class={linkClass}>Contact</NavLi>
 

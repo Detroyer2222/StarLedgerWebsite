@@ -4,4 +4,6 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+	//TODO: Make toggle between User and Organization
+	//TODO: Add Organization Settings in the sidebar
 </script>

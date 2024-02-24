@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { Card } from 'flowbite-svelte';
-	import { writable, type Writable } from 'svelte/store';
-	import { getContext } from 'svelte';
 </script>
 
 <main class="w-full bg-gray-50 dark:bg-gray-900">

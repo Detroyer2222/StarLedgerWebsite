@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import type { PageData } from '../../about/contact/$types';
 
 	export let data: PageData;
@@ -10,7 +11,7 @@
 		<p class="mb-8 text-center font-light text-gray-500 dark:text-gray-400 sm:text-xl lg:mb-16">
 			Got a technical issue? Have inquiries about GDPR laws?
 		</p>
-		<form action="post" class="space-y-8" use:enhance>
+		<form action="?/contact" method="post" class="space-y-8" use:enhance>
 			<div>
 				<label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
 				<input

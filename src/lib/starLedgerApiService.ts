@@ -50,7 +50,9 @@ export async function starLedgerRefreshAsync(refreshToken: string, cookies: Cook
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Accept: '*/*'
+			Accept: '*/*',
+			'Accept-Encoding': 'gzip, deflate, br',
+			Connection: 'keep-alive'
 		},
 		body: JSON.stringify({ refreshToken })
 	});

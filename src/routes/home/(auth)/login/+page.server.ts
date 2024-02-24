@@ -49,7 +49,7 @@ async function loginAsyncAction(email: string, password: string, cookies: Cookie
 		return fail(400, { failed: true });
 	}
 
-	throw redirect(302, '/dashboard');
+	return redirect(302, '/dashboard');
 }
 
 export const actions: Actions = { login };

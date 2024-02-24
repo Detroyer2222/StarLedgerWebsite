@@ -48,10 +48,10 @@
 	</div>
 	<Dropdown placement="bottom" triggeredBy="#avatar-menu">
 		<DropdownHeader>
-			{#if data.user.name !== undefined}
+			{#if data?.user?.name !== undefined}
 				<span class="block text-sm">{data.user.name}</span>
 			{/if}
-			<span class="block truncate text-sm font-medium">{data.user.email}</span>
+			<span class="block truncate text-sm font-medium">{data?.user?.email}</span>
 		</DropdownHeader>
 		<DropdownItem href="/dashboard/settings/profile">Settings</DropdownItem>
 		<DropdownItem href="/home/about">About</DropdownItem>
@@ -60,7 +60,7 @@
 		<DropdownItem href="/home/logout">Sign out</DropdownItem>
 	</Dropdown>
 	<NavUl>
-		<NavLi href="/dashbord" class={linkClass}>Dashboard</NavLi>
+		<NavLi href="/dashboard" class={linkClass}>Dashboard</NavLi>
 	</NavUl>
 </Navbar>
 

@@ -1,11 +1,10 @@
 import { StarLedger_Base_Url } from '$lib';
 import { starLedgerRefreshAsync } from '$lib/starLedgerApiService';
-import { type Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 export const authHandle: Handle = async ({ event, resolve }) => {
 	if (event.locals.user) {
-		console.log('user is already authenticated from authHandle');
 		return await resolve(event);
 	}
 
@@ -37,7 +36,7 @@ export const refreshHandle: Handle = async ({ event, resolve }) => {
 	if (refreshResult) {
 		const token = event.cookies.get('token');
 		if (!token) {
-			return await resolve(event);
+			return redirect(302, '/login');
 		}
 
 		const user = await setAuthenticatedUser(token);
