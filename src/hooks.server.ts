@@ -5,12 +5,12 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 export const authHandle: Handle = async ({ event, resolve }) => {
 	if (event.locals.user) {
-		return await resolve(event);
+		return resolve(event);
 	}
 
 	const token = event.cookies.get('token');
 	if (!token) {
-		return await resolve(event);
+		return resolve(event);
 	}
 
 	const user = await setAuthenticatedUser(token);
@@ -18,18 +18,18 @@ export const authHandle: Handle = async ({ event, resolve }) => {
 		event.locals.user = user;
 	}
 
-	return await resolve(event);
+	return resolve(event);
 };
 
 export const refreshHandle: Handle = async ({ event, resolve }) => {
 	if (event.locals.user) {
 		console.log('user is already authenticated from refreshHandle');
-		return await resolve(event);
+		return resolve(event);
 	}
 
 	const refreshToken = event.cookies.get('refreshToken');
 	if (!refreshToken) {
-		return await resolve(event);
+		return resolve(event);
 	}
 
 	const refreshResult = await starLedgerRefreshAsync(refreshToken, event.cookies);
@@ -45,7 +45,7 @@ export const refreshHandle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
-	return await resolve(event);
+	return resolve(event);
 };
 
 async function setAuthenticatedUser(token: string) {
